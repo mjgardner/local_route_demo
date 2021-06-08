@@ -1,6 +1,5 @@
 package Local::RouteDemo;
 use Mojo::Base 'Mojolicious', -signatures;
-use Local::RouteDemo::Routes 'make_routes';
 
 # This method will run once at server start
 sub startup ($self) {
@@ -11,8 +10,8 @@ sub startup ($self) {
     # Configure the application
     $self->secrets($config->{secrets});
 
-    # Make routes
-    make_routes($self->routes);
+    # Add routes from plugin
+    $self->plugin('Local::RouteDemo::Plugin::Routes');
 
     return;
 }
